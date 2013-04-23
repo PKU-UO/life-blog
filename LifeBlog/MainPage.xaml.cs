@@ -22,6 +22,23 @@ namespace LifeBlog
             //BuildLocalizedApplicationBar();
         }
 
+        private void Forgetpass_MouseEnter_1(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+
+        }
+
+        private void Register_MouseEnter_1(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/userManager/Register.xaml",UriKind.Relative));
+        }
+
+        private void select_connection_MouseEnter_1(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+
+        }
+
+      
+
         // 用于生成本地化 ApplicationBar 的示例代码
         //private void BuildLocalizedApplicationBar()
         //{
