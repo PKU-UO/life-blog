@@ -46,7 +46,7 @@
                 <TextBox Name="pass"/>
             </StackPanel>
             <StackPanel x:Name="age" Grid.Row="2">
-                <toolkit:DatePicker x:Name="datepicker" Header="AGE" Value="1/1/2013"/>
+                <toolkit:DatePicker x:Name="datepicker" Header="AGE" ValueStringFormat="yyyy-MM-dd"/>
             </StackPanel>
             <StackPanel Grid.Row="3">
                 <TextBlock Text="EMAIL" Margin="12,10,20,0"/>
