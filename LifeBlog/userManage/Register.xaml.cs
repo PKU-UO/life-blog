@@ -11,12 +11,17 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+
 namespace LifeBlog
 {
     public partial class Register : PhoneApplicationPage
     {
         public static ManualResetEvent allDone = new ManualResetEvent(false);
-        private HttpWebRequest request;
+        //private HttpWebRequest request;
         
         private string RegisterUrl = "http://lifeblog.herokuapp.com/api-root/users/";
         public Register()
@@ -24,51 +29,81 @@ namespace LifeBlog
             InitializeComponent();
         }
 
-        private void Regist_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            
-            //request = (HttpWebRequest)WebRequest.Create(RegisterUrl);
-            //request.ContentType = "application/x-www-form-urlencoded";
-            //request.Method = "POST";
-            //IAsyncResult r = request.BeginGetRequestStream(new AsyncCallback(readRequest), request);
-            //allDone.WaitOne();
 
-            //IAsyncResult responseR = request.BeginGetResponse(new AsyncCallback(getResponse), request);
-            //allDone.WaitOne();
+       
+        private void postComplete(object sender, UploadStringCompletedEventArgs e)
+        {
+            string res = e.Result;
+            NavigationService.Navigate(new Uri("/userManage/success.xaml", UriKind.Relative));
+        }
+        private string getPostdata()
+        {
+            LifeBlog.userManage.User user = new LifeBlog.userManage.User();
+            user.username = UserName.Text;
+            user.password = password.Password;
+            user.date_of_birth = datepicker.ValueString;
+            user.email = email.Text;
+            user.first_name = first_name.Text;
+            user.last_name = last_name.Text;
+            
+            string result = JsonConvert.SerializeObject(user);
+            //StringWriter sw = new StringWriter();
+            //JsonWriter writer = new JsonTextWriter(sw);
+            //writer.WriteStartObject();
+            //writer.WritePropertyName("username");
+            //writer.WriteValue(UserID.Text);
+            //writer.WritePropertyName("password");
+            //writer.WriteValue(pass.Text);
+            //writer.WritePropertyName("date_of_birth");
+            //writer.WriteValue(datepicker.Value);
+            //writer.WritePropertyName("email");
+            //writer.WriteValue(email.Text);
+            //writer.WritePropertyName("first_name");
+            //writer.WriteValue(first_name.Text);
+            //writer.WritePropertyName("last_name");
+            //writer.WriteValue(last_name.Text);
+            //writer.WriteEndObject();
+            //string jsonText = sw.GetStringBuilder().ToString();
+            return result;
+        }
+
+        private  void Button_Click_1(object sender, RoutedEventArgs e)
+        {
             WebClient webClient = new WebClient();
             webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
-            var uri = new Uri(RegisterUrl);
+            var uri = new Uri(RegisterUrl, UriKind.Absolute);
             string postData = getPostdata();
             webClient.Headers[HttpRequestHeader.ContentLength] = postData.Length.ToString();
             webClient.AllowWriteStreamBuffering = true;
             webClient.Encoding = System.Text.Encoding.UTF8;
             webClient.UploadStringAsync(uri, "POST", postData.ToString());
             webClient.UploadStringCompleted += new UploadStringCompletedEventHandler(postComplete);
-            allDone.WaitOne();
+            //allDone.WaitOne();
+        }
+        //    var httpWebRequest = (HttpWebRequest)WebRequest.Create(RegisterUrl);
+        //    httpWebRequest.ContentType = "text/json";
+        //    httpWebRequest.AllowWriteStreamBuffering = true;
+        //    httpWebRequest.Method = "POST";
+        //     //Write the request Asynchronously 
+        //    try {
+        //        using (var stream = await Task.Factory.FromAsync<Stream>(httpWebRequest.BeginGetRequestStream,
+        //                                                            httpWebRequest.EndGetRequestStream, null))
+        //        {
+        ////            create some json string
+        //            string json = getPostdata();
 
-        }
-       
-        private void postComplete(object sender, UploadStringCompletedEventArgs e)
-        {
-            allDone.Set();
-            HttpWebResponse result = JsonConvert.DeserializeObject<HttpWebResponse>(e.Result);
-            if (result.StatusCode == HttpStatusCode.OK)
-            {
-                NavigationService.Navigate(new Uri("/userManage/success.xaml", UriKind.Relative));
-            }
-        }
-        private string getPostdata()
-        {
-            LifeBlog.userManage.User user = new LifeBlog.userManage.User();
-            user.UserName = UserID.Text;
-            user.UserPass = pass.Text;
-            user.UserBirth = datepicker.ValueString;
-            user.UserEmail = email.Text;
-            user.UserFirstName = first_name.Text;
-            user.UserLastName = last_name.Text;
-            string result = JsonConvert.SerializeObject(user);
-            return result;
-        }
+        //             //convert json to byte array
+        //            byte[] jsonAsBytes = Encoding.UTF8.GetBytes(json);
+
+        //             //Write the bytes to the stream
+        //            await stream.WriteAsync(jsonAsBytes, 0, jsonAsBytes.Length);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message); 
+        //   }
+        //}
         //private void getResponse(IAsyncResult ar)
         //{
         //HttpWebRequest request = (HttpWebRequest)ar.AsyncState;

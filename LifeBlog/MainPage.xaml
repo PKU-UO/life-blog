@@ -14,7 +14,11 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/pencil.jpg"/>
+        </Grid.Background>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -42,8 +46,11 @@
 
         <!--TitlePanel 包含应用程序的名称和页标题-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="login LifeBlog" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="LifeBlog" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" HorizontalAlignment="Center"/>
+            <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0" Foreground="#FF2C0659">
+            	<Run Text="Login"/>
+            	<Run Text=":"/>
+            </TextBlock>
+            <TextBlock Text="LifeBlog" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" HorizontalAlignment="Center" RenderTransformOrigin="-0.312,0.552" Foreground="#FF390763" FontWeight="Bold"/>
         </StackPanel>
 
         <!--ContentPanel - 在此处放置其他内容-->
@@ -54,16 +61,48 @@
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel x:Name="login" Grid.Row="0" Margin="20,0,20,0">
-                <TextBox x:Name="userId" SelectedText="user"/>
-                <TextBox x:Name="password" SelectedText="password"/>
+                <TextBlock Margin="12,10,20,0" FontWeight="Bold">
+                	<Run Text="USERNAME">
+                		<Run.Foreground>
+                			<SolidColorBrush Color="#FF2C0659">
+                				<SolidColorBrush.RelativeTransform>
+                					<MatrixTransform Matrix="Identity"/>
+                				</SolidColorBrush.RelativeTransform>
+                				<SolidColorBrush.Transform>
+                					<MatrixTransform Matrix="Identity"/>
+                				</SolidColorBrush.Transform>
+                			</SolidColorBrush>
+                		</Run.Foreground>
+                	</Run>
+                </TextBlock>
+                <TextBox x:Name="userName" BorderBrush="#FF750CF1"/>
+                <TextBlock Margin="12,10,20,0" FontWeight="Bold">
+                	<Run Text="PASSWORD">
+                		<Run.Foreground>
+                			<SolidColorBrush Color="#FF2C0659">
+                				<SolidColorBrush.RelativeTransform>
+                					<MatrixTransform Matrix="Identity"/>
+                				</SolidColorBrush.RelativeTransform>
+                				<SolidColorBrush.Transform>
+                					<MatrixTransform Matrix="Identity"/>
+                				</SolidColorBrush.Transform>
+                			</SolidColorBrush>
+                		</Run.Foreground>
+                	</Run>
+                </TextBlock>
+                <PasswordBox x:Name="password" BorderBrush="#FF750CF1" />
             </StackPanel>
             <StackPanel Grid.Row="1">
-                <Button x:Name="LoginIn" Content="Login" Height="auto" Width="180" HorizontalAlignment="Right" Margin="0,0,50,0"/>
+                <TextBlock Name="hind" Foreground="#FF2C0659"></TextBlock>
+                <Button x:Name="LoginIn" Content="Login" Height="auto" Width="180" HorizontalAlignment="Right" Margin="0,0,50,0" Click="LoginIn_Click_1" Foreground="#FF2C0659" BorderBrush="#FF44088D" FontWeight="Bold" FontSize="24"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Margin="0,50,0,0">
-                <TextBlock x:Name="Forgetpass" Text="Forget Password ?" FontSize="18"  Margin="23,0,300,0" MouseEnter="Forgetpass_MouseEnter_1"/>
-                <TextBlock x:Name="Register" Text="Register" FontSize="18"  Margin="23,0,300,0" MouseEnter="Register_MouseEnter_1"/>
-                <TextBlock x:Name="select_connection" Text="Select Connection" FontSize="18"  Margin="23,0,300,0" MouseEnter="select_connection_MouseEnter_1"/>
+                <TextBlock x:Name="Forgetpass" FontSize="24"  Margin="23,0,248,0" MouseEnter="Forgetpass_MouseEnter_1" Foreground="#FF410D80">
+            		<Run Text="Forget "/>
+            		<Run Text="Password"/>
+                </TextBlock>
+                <HyperlinkButton Content="Register" HorizontalAlignment="Left" Height="55" Margin="10,0,0,0" Width="110" RenderTransformOrigin="0.237,0.582" Click="HyperlinkButton_Click_1" Foreground="#FF410D80"/>
+                <TextBlock x:Name="select_connection" Text="Select Connection" FontSize="24"  Margin="23,0,248,0" MouseEnter="select_connection_MouseEnter_1" Foreground="#FF410D80"/>
             </StackPanel>
         </Grid>
 
@@ -75,7 +114,7 @@
             在发送之前删除此 XAML 和图像本身。-->
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
         <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
-            <TextBlock Text="logout" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="30" Margin="50,10,50,10"/>
+            <HyperlinkButton Content="Logout" HorizontalAlignment="Left" Height="122" Margin="330,0,0,0" Width="120" RenderTransformOrigin="0.237,0.582" Click="HyperlinkButton_Click_1" Foreground="#FF28074F" FontWeight="Bold" FontSize="28"/>
         </StackPanel>
     </Grid>
 

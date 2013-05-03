@@ -8,18 +8,25 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using LifeBlog.Resources;
+using System.IO;
+using Newtonsoft.Json;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace LifeBlog
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        public static ManualResetEvent allDone = new ManualResetEvent(false);
+
+        private string LoginUrl = "http://lifeblog.herokuapp.com/api-root/api-token-auth/";
+        
         // 构造函数
         public MainPage()
         {
             InitializeComponent();
-
-            // 用于本地化 ApplicationBar 的示例代码
-            //BuildLocalizedApplicationBar();
         }
 
         private void Forgetpass_MouseEnter_1(object sender, System.Windows.Input.MouseEventArgs e)
@@ -27,9 +34,27 @@ namespace LifeBlog
 
         }
 
-        private void Register_MouseEnter_1(object sender, System.Windows.Input.MouseEventArgs e)
+        private void postComplete(object sender, UploadStringCompletedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("/userManager/Register.xaml",UriKind.Relative));
+            try {
+                string result = e.Result;
+                int begin = result.IndexOf("token");
+                int end = result.IndexOf("}");
+                string token = result.Substring(begin + 9, end - begin-10);
+                userManage.User user = new userManage.User();
+                user.token = token;
+                this.NavigationService.Navigate(new Uri("/userManage/success.xaml", UriKind.Relative));
+            }catch(Exception){
+                hind.Text = "wrong username or password";
+            }
+            
+
+        }
+
+        private string getPostdata()
+        {
+            string result = "username="+userName.Text+"&"+"password="+password.Password;
+            return result;
         }
 
         private void select_connection_MouseEnter_1(object sender, System.Windows.Input.MouseEventArgs e)
@@ -37,22 +62,24 @@ namespace LifeBlog
 
         }
 
-      
+        private void LoginIn_Click_1(object sender, RoutedEventArgs e)
+        {
+            hind.Text = "";
+            WebClient webClient = new WebClient();
+            webClient.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+            var uri = new Uri(LoginUrl,UriKind.Absolute);
+            string postData = getPostdata();         
+            webClient.Headers[HttpRequestHeader.ContentLength] = postData.Length.ToString();
+            webClient.AllowWriteStreamBuffering = true;
+            webClient.Encoding = System.Text.Encoding.UTF8;
+            webClient.UploadStringAsync(uri, "POST", postData.ToString());
+            webClient.UploadStringCompleted += new UploadStringCompletedEventHandler(postComplete);
+       
+        }
 
-        // 用于生成本地化 ApplicationBar 的示例代码
-        //private void BuildLocalizedApplicationBar()
-        //{
-        //    // 将页面的 ApplicationBar 设置为 ApplicationBar 的新实例。
-        //    ApplicationBar = new ApplicationBar();
-
-        //    // 创建新按钮并将文本值设置为 AppResources 中的本地化字符串。
-        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
-        //    appBarButton.Text = AppResources.AppBarButtonText;
-        //    ApplicationBar.Buttons.Add(appBarButton);
-
-        //    // 使用 AppResources 中的本地化字符串创建新菜单项。
-        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-        //}
+        private void HyperlinkButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/userManage/Register.xaml", UriKind.Relative));
+        }
     }
 }

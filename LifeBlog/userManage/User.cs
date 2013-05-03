@@ -8,11 +8,13 @@ namespace LifeBlog.userManage
 {
     class User
     {
-        public String UserName { get; set; }
-        public String UserPass { get; set; }
-        public String UserEmail { get; set; }
-        public String UserBirth { get; set; }
-        public String UserFirstName { get; set; }
-        public String UserLastName { get; set; }
+        public String username { get; set; }
+        public String password { get; set; }
+        public String date_of_birth { get; set; }
+        public String email { get; set; }        
+        public String first_name { get; set; }
+        public String last_name { get; set; }
+        public String articles { get; set; }
+        public String token { get;set;}
     }
 }

@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="LifeBlog.userManage.success"
+    x:Class="LifeBlog.userManage.Get"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -22,12 +22,14 @@
 
         <!--TitlePanel 包含应用程序的名称和页标题-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="LifeBlog" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Success" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="我的应用程序" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="GET Message" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - 在此处放置其他内容-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBox HorizontalAlignment="Left" Name="outputBox" Height="72" Margin="0,199,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="456" TextChanged="TextBox_TextChanged_1"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="218,384,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
 
         </Grid>
     </Grid>

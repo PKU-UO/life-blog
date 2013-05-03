@@ -8,8 +8,6 @@ D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\Bin\Debug\LifeBlog.
 D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\Bin\Debug\LifeBlog.pdb
 D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\Bin\Debug\AppManifest.xaml
 D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\Bin\Debug\LifeBlog_Debug_AnyCPU.xap
-D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\Bin\Debug\Microsoft.Phone.Controls.Toolkit.dll
-D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\Bin\Debug\Newtonsoft.Json.dll
 D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\Bin\Debug\Newtonsoft.Json.pdb
 D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\Bin\Debug\Newtonsoft.Json.xml
 D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\obj\Debug\LifeBlog.csprojResolveAssemblyReference.cache
@@ -25,3 +23,5 @@ D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\obj\Debug\XapCacheF
 D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\obj\Debug\userManage\success.g.cs
 D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\obj\Debug\userManage\GetMessage.g.cs
 D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\obj\Debug\userManage\fail.g.cs
+D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\Bin\Debug\Microsoft.Phone.Controls.dll
+D:\WorkSpaces\visual studio 2012\Projects\life-blog\LifeBlog\Bin\Debug\Microsoft.Phone.Controls.xml
